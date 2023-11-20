@@ -15,7 +15,18 @@ class CreateSponsorsTable extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('address')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('identification')->nullable();
+            $table->string('image')->nullable();
+            $table->text('description')->nullable();
+            $table->text('dob');
+            $table->softDeletes();
             $table->timestamps();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
