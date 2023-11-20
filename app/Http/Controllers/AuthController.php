@@ -12,7 +12,7 @@ class AuthController extends Controller
 { // ! reset password, remember on login
     public function __construct()
     {
-        $this->middleware('guest')->except(['logout']);
+        $this->middleware('guest')->except(['logout', 'users']);
     }
 
     public function showLogin()
@@ -44,7 +44,7 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'name' => ['required', 'min:3', 'max:50'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'confirmed', 'min:5'],
         ]);
 
@@ -68,5 +68,11 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+
+    public function users()
+    {
+        $users = User::paginate(20);
+        return view('user.index', compact('users'));
     }
 }

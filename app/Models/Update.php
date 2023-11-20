@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Update extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'attachment',
+        'content',
+        'user_id',
+        'child_id',
+        'update_id',
+    ];
 }

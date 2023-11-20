@@ -18,10 +18,10 @@ class CreateChildrenTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('contact_person')->nullable();
-            $table->string('contact_contact')->nullable();
+            $table->string('contact_details')->nullable();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
-            $table->text('dob');
+            $table->date('dob');
             $table->softDeletes();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
