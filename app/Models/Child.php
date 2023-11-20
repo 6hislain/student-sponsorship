@@ -12,6 +12,8 @@ class Child extends Model
     protected $fillable = [
         'first_name',
         'last_name',
+        'school',
+        'address',
         'contact_person',
         'contact_details',
         'image',

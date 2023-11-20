@@ -17,6 +17,8 @@ class CreateChildrenTable extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('school')->nullable();
+            $table->string('address')->nullable();
             $table->string('contact_person')->nullable();
             $table->string('contact_details')->nullable();
             $table->string('image')->nullable();
