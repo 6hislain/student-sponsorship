@@ -28,8 +28,8 @@
                     <td>{{ $user->role }}</td>
                     <td>{{ $user->email }}</td>
                     <td></td>
-                    {{-- <td>
-                        <div class='btn-group'>
+                    <td>
+                        {{-- <div class='btn-group'>
                             <a class='btn btn-sm btn-success' href='{{ route('user.show', $user->id) }}'>
                                 <i class='bi bi-eye'></i>
                             </a>
@@ -42,8 +42,8 @@
                             <button class='btn btn-sm btn-warning'>
                                 <i class='bi bi-trash'></i>
                             </button>
-                        </form>
-                    </td> --}}
+                        </form> --}}
+                    </td>
                 </tr>
             @endforeach
         </tbody>

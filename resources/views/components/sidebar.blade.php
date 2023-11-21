@@ -30,7 +30,7 @@
                 </a>
                 <a href="{{ route('application.index') }}"
                     class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'application')) active @endif">
-                    <i class='bi bi-arrow-down-up me-2'></i> Application
+                    <i class='bi bi-arrow-down-up me-2'></i> Sponsor Application
                 </a>
                 <a href="{{ route('user.index') }}"
                     class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'user')) active @endif">
