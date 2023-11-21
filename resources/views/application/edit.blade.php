@@ -1,6 +1,6 @@
-@extends('layouts.dashboard')
+@extends('layouts.default')
 @section('content')
-    <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb" class='d-none'>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ route('application.index') }}">Sponsor Application</a></li>
