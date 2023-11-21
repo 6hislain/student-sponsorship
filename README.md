@@ -36,3 +36,6 @@ The website Student Sponsorship is a valuable resource that empowers students in
 -   [x] User
 -   [x] Child
 -   [x] Sponsor
+-   [ ] Sponsor Application
+-   [ ] Payment
+-   [ ] Update
