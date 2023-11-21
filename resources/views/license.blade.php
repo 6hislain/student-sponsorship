@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('content')
     <h1>MIT License</h1>
-    <p>Copyright (c) 2023 Mugemana Ghislain</p>
+    <p>Copyright (c) 2023 Wiyizire Olivier</p>
     <p>
         Permission is hereby granted, free of charge, to any person obtaining a copy
         of this software and associated documentation files (the "Software"), to deal
