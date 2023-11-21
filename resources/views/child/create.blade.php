@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <input class='form-control mb-3' name='image' type='file' />
+                        <input class='form-control mb-3' name='image' type='file' accept="image/*" />
                     </div>
                 </div>
                 <textarea id='editor' class='form-control' name='description' placeholder="write more details">

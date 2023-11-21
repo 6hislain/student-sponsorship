@@ -27,13 +27,19 @@ class SponsorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'min:3', 'max:50'],
-            'contact' => ['required', 'min:5', 'max:50']
+            'first_name' => ['required', 'min:3', 'max:50'],
+            'last_name' => ['required', 'min:3', 'max:50'],
+            'contact' => ['required', 'min:5', 'max:50'],
+            'identification' => ['required'],
+            'dob' => ['required'],
         ]);
 
         Sponsor::create([
-            'name' => $request['name'],
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'address' => $request['address'],
             'contact' => $request['contact'],
+            'dob' => $request['dob'],
             'description' => $request['description'],
             'user_id' => Auth::id(),
         ]);
@@ -54,13 +60,18 @@ class SponsorController extends Controller
     public function update(Request $request, Sponsor $sponsor)
     {
         $request->validate([
-            'name' => ['required', 'min:3', 'max:50'],
-            'contact' => ['required', 'min:5', 'max:50']
+            'first_name' => ['required', 'min:3', 'max:50'],
+            'last_name' => ['required', 'min:3', 'max:50'],
+            'contact' => ['required', 'min:5', 'max:50'],
+            'dob' => ['required'],
         ]);
 
         $sponsor->update([
-            'name' => $request['name'],
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'address' => $request['address'],
             'contact' => $request['contact'],
+            'dob' => $request['dob'],
             'description' => $request['description'],
             'user_id' => Auth::id(),
         ]);
