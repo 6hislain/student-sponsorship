@@ -27,7 +27,6 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->role }}</td>
                     <td>{{ $user->email }}</td>
-                    <td></td>
                     <td>
                         {{-- <div class='btn-group'>
                             <a class='btn btn-sm btn-success' href='{{ route('user.show', $user->id) }}'>

@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->float('amount');
             $table->string('currency');
             $table->boolean('confirmed')->default(false);
-            $table->enum('type', ['monthly', 'donation'])->default('donation');
+            $table->enum('type', ['regular', 'donation'])->default('donation');
             $table->string('attachment')->nullable();
             $table->text('description')->nullable();
             $table->softDeletes();
