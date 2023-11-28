@@ -72,7 +72,7 @@ class AuthController extends Controller
 
     public function users()
     {
-        $users = User::paginate(20);
+        $users = User::paginate(10);
         return view('user.index', compact('users'));
     }
 

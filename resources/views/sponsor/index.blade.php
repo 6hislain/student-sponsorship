@@ -27,10 +27,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($sponsors as $sponsor)
+            @foreach ($sponsors as $key => $sponsor)
                 <tr>
-                    <th scope="row">{{ $sponsor->id }}</th>
-                    <td>{{ $sponsor->first_name }} {{ $sponsor->last_name }}</td>
+                    <th scope="row">{{ $key + 1 }}</th>
+                    <td>
+                        <img src='{{ $sponsor->image }}' height="40" width='40' alt=''
+                            class='rounded-pill me-1' />
+                        {{ $sponsor->first_name }} {{ $sponsor->last_name }}
+                    </td>
                     <td>{{ $sponsor->dob }}</td>
                     <td>{{ $sponsor->address }}</td>
                     <td>{{ $sponsor->contact }}</td>

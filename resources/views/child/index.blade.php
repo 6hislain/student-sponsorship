@@ -28,10 +28,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($children as $child)
+            @foreach ($children as $key => $child)
                 <tr>
-                    <th scope="row">{{ $child->id }}</th>
-                    <td>{{ $child->first_name }} {{ $child->last_name }}</td>
+                    <th scope="row">{{ $key + 1 }}</th>
+                    <td>
+                        <img src='{{ $child->image }}' height="40" width='40' alt=''
+                            class='rounded-pill me-1' />
+                        {{ $child->first_name }} {{ $child->last_name }}
+                    </td>
                     <td>{{ $child->dob }}</td>
                     <td>{{ $child->school }}</td>
                     <td>{{ $child->address }}</td>

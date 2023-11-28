@@ -7,6 +7,7 @@ use App\Models\Child;
 use App\Models\Payment;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DefaultController extends Controller
 {
@@ -47,6 +48,11 @@ class DefaultController extends Controller
 
     public function report()
     {
-        return view('dashboard.report');
+        $total = Payment::sum('amount');
+        $payments = Payment::select('sponsor_id', DB::raw('SUM(amount) as totalAmount'))
+            ->groupBy('sponsor_id')
+            ->get();
+
+        return view('dashboard.report', compact('payments', 'total'));
     }
 }

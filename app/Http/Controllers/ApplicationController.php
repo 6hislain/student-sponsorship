@@ -15,7 +15,7 @@ class ApplicationController extends Controller
 
     public function index()
     {
-        $applications = Application::paginate(20);
+        $applications = Application::paginate(10);
         return view('application.index', compact('applications'));
     }
 
