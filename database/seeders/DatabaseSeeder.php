@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         // Child::factory(50)->create();
         // Sponsor::factory(10)->create();
-        Payment::factory(200)->create();
+        // Payment::factory(200)->create();
     }
 }
