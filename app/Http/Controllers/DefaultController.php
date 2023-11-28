@@ -44,4 +44,9 @@ class DefaultController extends Controller
 
         return view('dashboard.index', compact(['children', 'sponsors', 'applications', 'payments']));
     }
+
+    public function report()
+    {
+        return view('dashboard.report');
+    }
 }

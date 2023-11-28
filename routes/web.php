@@ -25,6 +25,7 @@ Route::get('/about', [DefaultController::class, 'about'])->name('about');
 Route::get('/contact', [DefaultController::class, 'contact'])->name('contact');
 Route::get('/license', [DefaultController::class, 'license'])->name('license');
 Route::get('/dashboard', [DefaultController::class, 'dashboard'])->name('dashboard');
+Route::get('/dashboard/report', [DefaultController::class, 'report'])->name('report');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -32,6 +33,7 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard/user', [AuthController::class, 'users'])->name('user.index');
+Route::get('/dashboard/user/{user}', [AuthController::class, 'profile'])->name('user.show');
 
 Route::resources([
     'child' => ChildController::class,

@@ -12,6 +12,10 @@
                     class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'dashboard') active @endif">
                     <i class='bi bi-speedometer2 me-2'></i> Dashboard
                 </a>
+                <a href="{{ route('report') }}"
+                    class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'report') active @endif">
+                    <i class='bi bi-speedometer2 me-2'></i> Report
+                </a>
                 <a href="{{ route('child.index') }}"
                     class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'child')) active @endif">
                     <i class='bi bi-collection me-2'></i> Children
@@ -36,7 +40,7 @@
                     class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'user')) active @endif">
                     <i class='bi bi-people me-2'></i> User
                 </a>
-                <a href="{{ route('user.index') }}" class="list-group-item list-group-item-action">
+                <a href="{{ route('user.show', Auth::user()->id) }}" class="list-group-item list-group-item-action">
                     <i class='bi bi-person-circle me-2'></i> Profile
                 </a>
                 <a href="{{ route('logout') }}" class="list-group-item list-group-item-action">
