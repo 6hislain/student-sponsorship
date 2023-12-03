@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Child;
+use App\Models\Payment;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +51,9 @@ class SponsorController extends Controller
 
     public function show(Request $request, Sponsor $sponsor)
     {
-        return view('sponsor.show', compact('sponsor'));
+        $payments = Payment::paginate(10);
+        $children = Child::take(10)->get();
+        return view('sponsor.show', compact(['sponsor', 'payments', 'children']));
     }
 
     public function edit(Request $request, Sponsor $sponsor)
