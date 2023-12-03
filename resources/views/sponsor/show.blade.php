@@ -8,6 +8,9 @@
             <li class="breadcrumb-item active" aria-current="page">Sponsor Profile</li>
         </ol>
     </nav>
+    @php
+        $currentDate = new DateTime();
+    @endphp
     <div class="card card-body shadow-sm">
         <div class="d-flex flex-row">
             <img src='{{ $sponsor->image }}' height="120" width='120' alt='{{ $sponsor->first_name }}'
@@ -69,7 +72,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">School</th>
-                        <th scope="col">Contact</th>
+                        <th scope="col">Age</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,7 +83,7 @@
                                 {{ $child->first_name }} {{ $child->last_name }}
                             </td>
                             <td>{{ $child->school }}</td>
-                            <td>{{ $child->contact_details }}</td>
+                            <td>{{ $currentDate->diff(new DateTime($child->dob))->y }}</td>
                         </tr>
                     @endforeach
                 </tbody>
