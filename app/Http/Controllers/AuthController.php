@@ -12,7 +12,7 @@ class AuthController extends Controller
 { // ! reset password, remember on login
     public function __construct()
     {
-        $this->middleware('guest')->except(['logout', 'users', 'profile']);
+        $this->middleware('guest')->except(['logout', 'users', 'profile', 'edit', 'update']);
     }
 
     public function showLogin()
@@ -38,6 +38,24 @@ class AuthController extends Controller
     public function showRegister()
     {
         return view('auth.register');
+    }
+
+    public function edit(User $user)
+    {
+        return view('auth.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user,)
+    {
+        $request->validate([
+            'role' => ['required', 'min:3', 'max:50'], 'name' => ['required', 'min:3', 'max:50'],
+        ]);
+
+        $user->update([
+            'name' => $request['name'], 'role' => $request['role'],
+        ]);
+
+        return redirect()->route('user.index');
     }
 
     public function register(Request $request): RedirectResponse

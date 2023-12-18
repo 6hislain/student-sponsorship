@@ -28,7 +28,7 @@
                     <td>{{ $user->role }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        {{-- <div class='btn-group'>
+                        <div class='btn-group'>
                             <a class='btn btn-sm btn-success' href='{{ route('user.show', $user->id) }}'>
                                 <i class='bi bi-eye'></i>
                             </a>
@@ -36,7 +36,7 @@
                                 <i class='bi bi-pencil'></i>
                             </a>
                         </div>
-                        <form action='{{ route('user.destroy', $user->id) }}' method='post' class='d-inline'>
+                        {{-- <form action='{{ route('user.destroy', $user->id) }}' method='post' class='d-inline'>
                             @csrf @method('delete')
                             <button class='btn btn-sm btn-warning'>
                                 <i class='bi bi-trash'></i>
