@@ -18,7 +18,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if (in_array(Auth::user()->role, ['admin', 'coordinator', 'sponsor'])) return $next($request);
+            if (in_array(Auth::user()->role, ['admin', 'coordinator', 'sponsor', 'user'])) return $next($request);
         }
 
         return redirect()->back()->with('error', 'You do not have permission to access this page.');

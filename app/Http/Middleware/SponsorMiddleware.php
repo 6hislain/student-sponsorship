@@ -18,7 +18,7 @@ class SponsorMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'sponsor') return $next($request);
+            if (in_array(Auth::user()->role, ['sponsor', 'user'])) return $next($request);
         }
 
         return redirect()->back()->with('error', 'You do not have permission to access this page.');
