@@ -32,4 +32,9 @@ class Sponsor extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function childSupport(): HasMany
+    {
+        return $this->hasMany(ChildSupport::class);
+    }
 }

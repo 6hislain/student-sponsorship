@@ -27,4 +27,9 @@ class Child extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function childSupport(): HasMany
+    {
+        return $this->hasMany(ChildSupport::class);
+    }
 }

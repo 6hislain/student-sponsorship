@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Update::class);
     }
+
+    public function childSupport(): HasMany
+    {
+        return $this->hasMany(ChildSupport::class);
+    }
 }
