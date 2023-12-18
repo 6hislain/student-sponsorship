@@ -12,30 +12,36 @@
                     class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'dashboard') active @endif">
                     <i class='bi bi-speedometer2 me-2'></i> Dashboard
                 </a>
-                <a href="{{ route('report') }}"
-                    class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'report') active @endif">
-                    <i class='bi bi-speedometer2 me-2'></i> Report
-                </a>
-                <a href="{{ route('child.index') }}"
-                    class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'child')) active @endif">
-                    <i class='bi bi-collection me-2'></i> Children
-                </a>
-                <a href="{{ route('sponsor.index') }}"
-                    class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'sponsor')) active @endif">
-                    <i class='bi bi-person-check me-2'></i> Sponsor
-                </a>
-                <a href="{{ route('payment.index') }}"
-                    class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'payment')) active @endif">
-                    <i class='bi bi-box me-2'></i> Payment
-                </a>
-                <a href="{{ route('update.index') }}"
-                    class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'update')) active @endif">
-                    <i class='bi bi-arrow-down-up me-2'></i> Update
-                </a>
-                <a href="{{ route('application.index') }}"
-                    class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'application')) active @endif">
-                    <i class='bi bi-arrow-down-up me-2'></i> Sponsor Application
-                </a>
+                @if (in_array(Auth::user()->role, ['admin', 'coordinator']))
+                    <a href="{{ route('report') }}"
+                        class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'report') active @endif">
+                        <i class='bi bi-speedometer2 me-2'></i> Report
+                    </a>
+                    <a href="{{ route('sponsor.index') }}"
+                        class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'sponsor')) active @endif">
+                        <i class='bi bi-person-check me-2'></i> Sponsor
+                    </a>
+                @endif
+                @if (in_array(Auth::user()->role, ['sponsor', 'coordinator', 'admin']))
+                    <a href="{{ route('child.index') }}"
+                        class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'child')) active @endif">
+                        <i class='bi bi-collection me-2'></i> Children
+                    </a>
+                    <a href="{{ route('payment.index') }}"
+                        class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'payment')) active @endif">
+                        <i class='bi bi-box me-2'></i> Payment
+                    </a>
+                    <a href="{{ route('update.index') }}"
+                        class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'update')) active @endif">
+                        <i class='bi bi-arrow-down-up me-2'></i> Update
+                    </a>
+                @endif
+                @if (in_array(Auth::user()->role, ['user', 'coordinator', 'admin']))
+                    <a href="{{ route('application.index') }}"
+                        class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'application')) active @endif">
+                        <i class='bi bi-arrow-down-up me-2'></i> Sponsor Application
+                    </a>
+                @endif
                 @if (Auth::user()->role == 'admin')
                     <a href="{{ route('user.index') }}"
                         class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'user')) active @endif">
