@@ -12,6 +12,7 @@ class AuthController extends Controller
 { // ! reset password, remember on login
     public function __construct()
     {
+        $this->middleware('admin')->only(['users', 'update', 'edit']);
         $this->middleware('guest')->except(['logout', 'users', 'profile', 'edit', 'update']);
     }
 

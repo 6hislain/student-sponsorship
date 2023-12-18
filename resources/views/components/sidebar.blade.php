@@ -36,10 +36,12 @@
                     class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'application')) active @endif">
                     <i class='bi bi-arrow-down-up me-2'></i> Sponsor Application
                 </a>
-                <a href="{{ route('user.index') }}"
-                    class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'user')) active @endif">
-                    <i class='bi bi-people me-2'></i> User
-                </a>
+                @if (Auth::user()->role == 'admin')
+                    <a href="{{ route('user.index') }}"
+                        class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'user')) active @endif">
+                        <i class='bi bi-people me-2'></i> User
+                    </a>
+                @endif
                 <a href="{{ route('user.show', Auth::user()->id) }}" class="list-group-item list-group-item-action">
                     <i class='bi bi-person-circle me-2'></i> Profile
                 </a>
