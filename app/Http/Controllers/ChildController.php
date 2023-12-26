@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Child;
+use App\Models\Update;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,7 +53,8 @@ class ChildController extends Controller
 
     public function show(Request $request, Child $child)
     {
-        return view('child.show', compact('child'));
+        $updates = Update::paginate(10);
+        return view('child.show', compact('child', 'updates'));
     }
 
     public function edit(Request $request, Child $child)
