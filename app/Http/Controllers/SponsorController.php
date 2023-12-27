@@ -55,7 +55,7 @@ class SponsorController extends Controller
 
     public function show(Request $request, Sponsor $sponsor)
     {
-        $payments = Payment::paginate(10);
+        $payments = Payment::where('sponsor_id', $sponsor->id)->paginate(10);
         $children = ChildSupport::where('user_id', Auth::id())->paginate(10);
         return view('sponsor.show', compact(['sponsor', 'payments', 'children']));
     }

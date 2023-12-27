@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Child;
 use App\Models\Payment;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
@@ -22,8 +23,9 @@ class PaymentController extends Controller
 
     public function create()
     {
+        $children = Child::all();
         $sponsors = Sponsor::all();
-        return view('payment.create', compact('sponsors'));
+        return view('payment.create', compact('sponsors', 'children'));
     }
 
     public function store(Request $request)
@@ -32,17 +34,39 @@ class PaymentController extends Controller
             'amount' => ['required'],
             'currency' => ['required'],
             'type' => ['required'],
-            'attachment' => ['required'],
-            'sponsor' => ['required'],
+            'attachment' => ['image'],
+            'child' => ['required'],
         ]);
+
+        switch ($request['currency']) {
+            case 'USD':
+                $local_value = $request['amount'] * 1200;
+                break;
+            case 'EUR':
+                $local_value = $request['amount'] * 1400;
+                break;
+            default:
+                $local_value = $request['amount'];
+        }
+
+        $image = $request->file('attachment');
+        if ($image) {
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public', $image_name);
+        }
+
+        if (Auth::user()->role == 'sponsor')  $sponsor = Sponsor::where('user_id', Auth::id())->first();
 
         Payment::create([
             'amount' => $request['amount'],
             'currency' => $request['currency'],
             'confirmed' => $request['confirmed'] == 'on',
             'type' => $request['type'],
-            'sponsor_id' => $request['sponsor'],
+            'local_value' => $local_value,
+            'child_id' => $request['child'],
+            'sponsor_id' => isset($sponsor) ? $sponsor->id : $request['sponsor'],
             'description' => $request['description'],
+            'attachment' => $image ? $image_name : null,
             'user_id' => Auth::id(),
         ]);
 
@@ -56,8 +80,9 @@ class PaymentController extends Controller
 
     public function edit(Request $request, Payment $payment)
     {
+        $children = Child::all();
         $sponsors = Sponsor::all();
-        return view('payment.edit', compact(['payment', 'sponsors']));
+        return view('payment.edit', compact(['payment', 'sponsors', 'children']));
     }
 
     public function update(Request $request, Payment $payment)
@@ -66,17 +91,39 @@ class PaymentController extends Controller
             'amount' => ['required'],
             'currency' => ['required'],
             'type' => ['required'],
-            'attachment' => ['required'],
-            'sponsor' => ['required'],
+            'attachment' => ['image'],
+            'child' => ['required'],
         ]);
+
+        switch ($request['currency']) {
+            case 'USD':
+                $local_value = $request['amount'] * 1200;
+                break;
+            case 'EUR':
+                $local_value = $request['amount'] * 1400;
+                break;
+            default:
+                $local_value = $request['amount'];
+        }
+
+        $image = $request->file('attachment');
+        if ($image) {
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public', $image_name);
+        }
+
+        if (Auth::user()->role == 'sponsor')  $sponsor = Sponsor::where('user_id', Auth::id())->first();
 
         $payment->update([
             'amount' => $request['amount'],
             'currency' => $request['currency'],
             'confirmed' => $request['confirmed'] == 'on',
             'type' => $request['type'],
-            'sponsor_id' => $request['sponsor'],
+            'local_value' => $local_value,
+            'child_id' => $request['child'],
+            'sponsor_id' => isset($sponsor) ? $sponsor->id : $request['sponsor'],
             'description' => $request['description'],
+            'attachment' => $image ? $image_name : null,
             'user_id' => Auth::id(),
         ]);
 

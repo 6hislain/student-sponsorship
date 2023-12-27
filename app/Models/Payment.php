@@ -12,18 +12,25 @@ class Payment extends Model
 
     protected $fillable = [
         'amount',
+        'local_value',
         'currency',
         'confirmed',
         'type',
         'attachment',
         'description',
         'sponsor_id',
+        'child_id',
         'user_id',
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function child(): BelongsTo
+    {
+        return $this->belongsTo(Child::class);
     }
 
     public function sponsor(): BelongsTo

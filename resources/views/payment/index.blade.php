@@ -37,14 +37,11 @@
                     <td>{{ $payment->confirmed ? 'yes' : 'no' }}</td>
                     <td>{{ $payment->created_at }}</td>
                     <td>
-                        <div class='btn-group'>
-                            <a class='btn btn-sm btn-success' href='{{ route('payment.show', $payment->id) }}'>
-                                <i class='bi bi-eye'></i>
-                            </a>
+                        @if (!$payment->confirmed)
                             <a class='btn btn-sm btn-info' href='{{ route('payment.edit', $payment->id) }}'>
                                 <i class='bi bi-pencil'></i>
                             </a>
-                        </div>
+                        @endif
                         <form action='{{ route('payment.destroy', $payment->id) }}' method='post' class='d-inline'>
                             @csrf @method('delete')
                             <button class='btn btn-sm btn-warning'>

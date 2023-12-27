@@ -16,6 +16,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->float('amount');
+            $table->float('local_value')->nullable();
             $table->string('currency');
             $table->boolean('confirmed')->default(false);
             $table->enum('type', ['regular', 'donation'])->default('donation');
@@ -24,8 +25,10 @@ class CreatePaymentsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('child_id')->nullable();
             $table->unsignedBigInteger('sponsor_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('child_id')->references('id')->on('children')->onDelete('cascade');
             $table->foreign('sponsor_id')->references('id')->on('sponsors')->onDelete('cascade');
         });
     }

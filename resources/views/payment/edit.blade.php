@@ -22,8 +22,8 @@
                             <option value='RWF'>RWF</option>
                         </select>
                     </div>
-                    <div class='col-md-4'>
-                        <input class='form-control mb-3' name='amount' placeholder='amount' type='number'
+                    <div class='col-md-3'>
+                        <input class='form-control mb-3' name='amount' min='1' placeholder='amount' type='number'
                             value='{{ $payment->amount }}' />
                     </div>
                     <div class='col-md-3'>
@@ -33,14 +33,28 @@
                             <option value='donation'>donation</option>
                         </select>
                     </div>
-                    <div class='col-md-3'>
-                        <select class='form-select mb-3' name='sponsor'>
-                            <option value='{{ $payment->sponsor_id }}'>
-                                {{ $payment->sponsor->first_name }} {{ $payment->sponsor->last_name }}
+                    @if (Auth::user()->role != 'sponsor')
+                        <div class='col-md-2'>
+                            <select class='form-select mb-3' name='sponsor' required>
+                                <option value='{{ $payment->sponsor_id }}'>
+                                    {{ $payment->sponsor->first_name }} {{ $payment->sponsor->last_name }}
+                                </option>
+                                @foreach ($sponsors as $sponsor)
+                                    <option value='{{ $sponsor->id }}'>
+                                        {{ $sponsor->first_name }} {{ $sponsor->last_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
+                    <div class='col-md-2'>
+                        <select class='form-select mb-3' name='child'>
+                            <option value='{{ $payment->child_id }}'>
+                                {{ $payment->child->first_name }} {{ $payment->child->last_name }}
                             </option>
-                            @foreach ($sponsors as $sponsor)
-                                <option value='{{ $sponsor->id }}'>
-                                    {{ $sponsor->first_name }} {{ $sponsor->last_name }}
+                            @foreach ($children as $child)
+                                <option value='{{ $child->id }}'>
+                                    {{ $child->first_name }} {{ $child->last_name }}
                                 </option>
                             @endforeach
                         </select>
@@ -50,15 +64,16 @@
                         <input class='form-control mb-3' name='attachment' type='file'
                             accept="image/*,.doc,.docx,.pdf" />
                     </div>
-                    <div class='col-md-3'>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="confirmed"
-                                value="{{ $payment->confirmed ? 'on' : '' }}">
-                            <label class="form-check-label" for="confirmed">
-                                Payment Received
-                            </label>
+                    @if (Auth::user()->role != 'sponsor')
+                        <div class='col-md-3'>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="confirmed">
+                                <label class="form-check-label" for="confirmed">
+                                    Payment Received
+                                </label>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
                 <textarea id='editor' class='form-control' name='description' placeholder="write more details">
                     {{ $payment->description }}
