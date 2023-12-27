@@ -9,11 +9,6 @@
     </nav>
     <div class='d-flex justify-content-between'>
         <h2>All sponsors</h2>
-        <span>
-            <a class='btn btn-outline-primary rounded-pill' href='{{ route('sponsor.create') }}'>
-                <i class='bi bi-plus'></i> Add sponsor
-            </a>
-        </span>
     </div>
     <table class="table table-bordered table-hover">
         <thead class="table-light">
