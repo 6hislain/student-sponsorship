@@ -27,9 +27,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($applications as $application)
+            @foreach ($applications as $key => $application)
                 <tr>
-                    <th scope="row">{{ $application->id }}</th>
+                    <th scope="row">{{ $key + 1 }}</th>
                     <td>{{ $application->first_name }} {{ $application->last_name }}</td>
                     <td>{{ $application->currency }} {{ $application->amount }}, {{ $application->frequency }}</td>
                     <td>{{ $application->country }}, {{ $application->address }}</td>

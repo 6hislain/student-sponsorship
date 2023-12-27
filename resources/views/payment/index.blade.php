@@ -27,9 +27,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($payments as $payment)
+            @foreach ($payments as $key => $payment)
                 <tr>
-                    <th scope="row">{{ $payment->id }}</th>
+                    <th scope="row">{{ $key + 1 }}</th>
                     <td>
                         {{ $payment->sponsor->first_name }} {{ $payment->sponsor->last_name }}
                     </td>
