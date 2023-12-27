@@ -59,6 +59,9 @@
                                     <a class='btn btn-sm btn-success' href='{{ route('sponsor.show', $sponsor->id) }}'>
                                         <i class='bi bi-arrow-right'></i>
                                     </a>
+                                    <a class='btn btn-sm btn-info' href='{{ route('sponsor.edit', $sponsor->id) }}'>
+                                        <i class='bi bi-pencil'></i>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>

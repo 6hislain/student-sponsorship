@@ -23,7 +23,7 @@
                         <th>First name</th>
                         <th>Last name</th>
                         <th>Contact</th>
-                        <th colspan='2'>Address</th>
+                        <th>Address</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,11 +32,6 @@
                         <td>{{ $sponsor->last_name }}</td>
                         <td>{{ $sponsor->contact }}</td>
                         <td>{{ $sponsor->address }}</td>
-                        <td>
-                            <a class='btn btn-sm btn-info' href='{{ route('sponsor.edit', $sponsor->id) }}'>
-                                <i class='bi bi-pencil'></i>
-                            </a>
-                        </td>
                     </tr>
                 </tbody>
             </table>
