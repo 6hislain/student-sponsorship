@@ -14,8 +14,8 @@
     <div class="card card-body shadow-sm">
         <div class="d-flex flex-row">
             @if ($sponsor->image)
-                <img alt='{{ $sponsor->first_name }}' src='{{ asset('storage/' . $sponsor->image) }}' width='120'
-                    height='120' style='object-fit:cover' class='rounded-pill me-3 my-auto' />
+                <img alt='{{ $sponsor->first_name }}' src='{{ asset('storage/' . $sponsor->image) }}' width='80'
+                    height='80' style='object-fit:cover' class='rounded-pill me-3 my-auto' />
             @endif
             <table class="table table-bordered table-hover mb-0">
                 <thead class="table-light">
@@ -32,10 +32,6 @@
                         <td>{{ $sponsor->last_name }}</td>
                         <td>{{ $sponsor->contact }}</td>
                         <td>{{ $sponsor->address }}</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td colspan="3">{!! $sponsor->description !!}</td>
                     </tr>
                 </tbody>
             </table>
