@@ -10,8 +10,10 @@
     </nav>
     <div class="card card-body shadow-sm mb-3">
         <div class="d-flex flex-row">
-            <img src='{{ $child->image }}' height="120" width='120' alt='{{ $child->first_name }}'
-                class='rounded-pill me-3 my-auto' />
+            @if ($child->image)
+                <img alt='{{ $child->first_name }}' src='{{ asset('storage/' . $child->image) }}' width='120'
+                    height='120' style='object-fit:cover' class='rounded-pill me-3 my-auto' />
+            @endif
             <table class="table table-bordered table-hover mb-0">
                 <thead class="table-light">
                     <tr>
