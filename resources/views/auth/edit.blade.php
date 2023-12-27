@@ -24,7 +24,7 @@
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text w-25">Role</span>
-                    <select name="role" class="form-select">
+                    <select name="role" class="form-select" @if (Auth::user()->role == 'sponsor') disabled='' @endif>
                         <option value='{{ $user->role }}'>{{ $user->role }}</option>
                         <option value='user'>user</option>
                         <option value='sponsor'>sponsor</option>

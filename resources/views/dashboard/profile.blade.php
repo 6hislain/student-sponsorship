@@ -14,15 +14,22 @@
             <table class='table table-bordered table-hover'>
                 <tr>
                     <th>Name</th>
-                    <td>{{ $user->name }}</td>
+                    <td colspan='2'>{{ $user->name }}</td>
                 </tr>
                 <tr>
                     <th>Email</th>
-                    <td>{{ $user->email }}</td>
+                    <td colspan='2'>{{ $user->email }}</td>
                 </tr>
                 <tr>
                     <th>Role</th>
                     <td>{{ $user->role }}</td>
+                    <td>
+                        @if ($user->id == Auth::id())
+                            <a class='btn btn-sm btn-info' href='{{ route('user.edit', $user->id) }}'>
+                                <i class='bi bi-pencil'></i>
+                            </a>
+                        @endif
+                    </td>
                 </tr>
             </table>
         </div>

@@ -51,15 +51,14 @@ class AuthController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $request->validate([
-            'role' => ['required', 'min:3', 'max:50'], 'name' => ['required', 'min:3', 'max:50'],
-        ]);
+        $request->validate(['name' => ['required', 'min:3', 'max:50']]);
 
         $user->update([
-            'name' => $request['name'], 'role' => $request['role'],
+            'name' => $request['name'], 'role' => $request['role'] ?: $user->role,
         ]);
 
-        return redirect()->route('user.index');
+        if (Auth::user()->role == 'sponsor') return redirect()->route('user.show', $user->id);
+        else return redirect()->route('user.index');
     }
 
     public function register(Request $request): RedirectResponse
