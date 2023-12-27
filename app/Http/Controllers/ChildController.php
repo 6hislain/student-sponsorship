@@ -61,7 +61,7 @@ class ChildController extends Controller
 
     public function show(Request $request, Child $child)
     {
-        $updates = Update::paginate(10);
+        $updates = Update::where('child_id', $child->id)->paginate(10);
         return view('child.show', compact('child', 'updates'));
     }
 
