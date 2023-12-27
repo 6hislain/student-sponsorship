@@ -46,6 +46,6 @@ class UpdateController extends Controller
     public function destroy(Update $update)
     {
         $update->delete();
-        return redirect()->route('update.index');
+        return redirect()->back();
     }
 }

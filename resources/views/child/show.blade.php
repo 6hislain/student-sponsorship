@@ -37,19 +37,33 @@
                     </tr>
                     <tr>
                         <th>Description</th>
-                        <td colspan="4">{{ $child->description }}</td>
+                        <td colspan="4">{!! $child->description !!}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     @foreach ($updates as $update)
-        <div>
-            {!! $update->content !!}
-            @if ($update->attachment)
-                <img alt='.' src='{{ asset('storage/' . $update->attachment) }}' width='300'
-                    style='object-fit:cover' />
-            @endif
+        <div class='d-flex mb-2 hover-white p-2'>
+            <img alt='{{ $update->user->name }}' src='/img/user.png' width='40' height='40' style='object-fit:cover'
+                class='rounded-pill me-1' />
+            <div class='ms-2 me-auto'>
+                <h6>
+                    {{ $update->user->name }} &middot;
+                    <span class='text-muted'>{{ $update->created_at->diffForHumans() }}</span>
+                </h6>
+                {!! $update->content !!}
+                @if ($update->attachment)
+                    <img alt='.' src='{{ asset('storage/' . $update->attachment) }}' width='300'
+                        style='object-fit:cover' />
+                @endif
+            </div>
+            <form action='{{ route('update.destroy', $update->id) }}' method='post' class='d-inline'>
+                @csrf @method('delete')
+                <button class='btn btn-sm btn-warning rounded-pill'>
+                    <i class='bi bi-trash'></i>
+                </button>
+            </form>
         </div>
     @endforeach
     {{ $updates->links() }}
@@ -70,6 +84,13 @@
             </form>
         </div>
     </div>
+@endsection
+@section('styles')
+    <style>
+        .hover-white:hover {
+            background-color: whitesmoke;
+        }
+    </style>
 @endsection
 @section('scripts')
     <script src="/js/ckeditor.js"></script>
