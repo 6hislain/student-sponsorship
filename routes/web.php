@@ -26,6 +26,7 @@ Route::get('/contact', [DefaultController::class, 'contact'])->name('contact');
 Route::get('/license', [DefaultController::class, 'license'])->name('license');
 Route::get('/dashboard', [DefaultController::class, 'dashboard'])->name('dashboard');
 Route::get('/dashboard/report', [DefaultController::class, 'report'])->name('report');
+Route::get('/dashboard/support/{child}/{sponsor}', [DefaultController::class, 'support'])->name('child.support');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);

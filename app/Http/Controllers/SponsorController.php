@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Child;
 use App\Models\Payment;
 use App\Models\Sponsor;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,8 @@ class SponsorController extends Controller
 
     public function create()
     {
-        return view('sponsor.create');
+        $users = User::all();
+        return view('sponsor.create', compact('users'));
     }
 
     public function store(Request $request)
@@ -33,6 +35,7 @@ class SponsorController extends Controller
             'last_name' => ['required', 'min:3', 'max:50'],
             'contact' => ['required', 'min:5', 'max:50'],
             'identification' => ['required'],
+            'user' => ['required'],
             'dob' => ['required'],
         ]);
 
@@ -43,7 +46,7 @@ class SponsorController extends Controller
             'contact' => $request['contact'],
             'dob' => $request['dob'],
             'description' => $request['description'],
-            'user_id' => Auth::id(),
+            'user_id' => $request['user'],
         ]);
 
         return redirect()->route('sponsor.index');
@@ -58,7 +61,8 @@ class SponsorController extends Controller
 
     public function edit(Request $request, Sponsor $sponsor)
     {
-        return view('sponsor.edit', compact('sponsor'));
+        $users = User::all();
+        return view('sponsor.edit', compact('sponsor', 'users'));
     }
 
     public function update(Request $request, Sponsor $sponsor)
@@ -67,6 +71,7 @@ class SponsorController extends Controller
             'first_name' => ['required', 'min:3', 'max:50'],
             'last_name' => ['required', 'min:3', 'max:50'],
             'contact' => ['required', 'min:5', 'max:50'],
+            'user' => ['required'],
             'dob' => ['required'],
         ]);
 
@@ -77,7 +82,7 @@ class SponsorController extends Controller
             'contact' => $request['contact'],
             'dob' => $request['dob'],
             'description' => $request['description'],
-            'user_id' => Auth::id(),
+            'user_id' => $request['user'],
         ]);
 
         return redirect()->route('sponsor.index');

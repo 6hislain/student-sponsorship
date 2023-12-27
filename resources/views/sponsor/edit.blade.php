@@ -14,11 +14,11 @@
                 <h2 class='mb-3'>Edit sponsor</h2>
                 @include('components.message')
                 <div class='row'>
-                    <div class='col-md-3'>
+                    <div class='col-md-2'>
                         <input class='form-control mb-3' name='first_name' placeholder='first name'
                             value='{{ $sponsor->first_name }}' />
                     </div>
-                    <div class='col-md-3'>
+                    <div class='col-md-2'>
                         <input class='form-control mb-3' name='last_name' placeholder='last name'
                             value='{{ $sponsor->last_name }}' />
                     </div>
@@ -26,9 +26,17 @@
                         <input class='form-control mb-3' name='contact' placeholder='phone or email'
                             value='{{ $sponsor->contact }}' />
                     </div>
-                    <div class='col-md-3'>
+                    <div class='col-md-2'>
                         <input class='form-control mb-3' name='address' placeholder='address'
                             value='{{ $sponsor->address }}' />
+                    </div>
+                    <div class='col-md-3'>
+                        <select name="user" id="" class="form-select">
+                            <option value="{{ $sponsor->user_id }}">{{ $sponsor->user->name }}</option>
+                            @foreach ($users as $user)
+                                <option value='{{ $user->id }}'>{{ $user->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class='col-md-4'>
                         <label for="dob" class='form-label'>Date of birth</label>

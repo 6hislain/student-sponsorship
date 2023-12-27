@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\WelcomeMail;
+use App\Models\Sponsor;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -104,6 +105,7 @@ class AuthController extends Controller
 
     public function profile(User $user)
     {
-        return view('dashboard.profile', compact('user'));
+        $sponsors = Sponsor::where('user_id', $user->id)->get();
+        return view('dashboard.profile', compact('user', 'sponsors'));
     }
 }

@@ -62,30 +62,32 @@
                 <form action='{{ route('update.destroy', $update->id) }}' method='post' class='d-inline'>
                     @csrf @method('delete')
                     <button class='btn btn-sm btn-warning rounded-pill'>
-                        <i class='bi bi-trash'></i>
+                        <i class='bi bi-x-lg'></i>
                     </button>
                 </form>
             @endif
         </div>
     @endforeach
     {{ $updates->links() }}
-    <div class="card shadow-sm my-3">
-        <div class="card-header">Post Update</div>
-        <div class="card-body">
-            @include('components.message')
-            <form method='post' action='{{ route('update.store') }}' enctype="multipart/form-data">
-                <textarea id='editor' name="content" rows="2" class="form-control"></textarea>
-                <div class="d-flex justify-content-between mt-2">
-                    <div>
-                        @csrf
-                        <input type="hidden" name="child" value='{{ $child->id }}' />
-                        <input class='form-control' name='attachment' type='file' accept="image/*" />
+    @if (in_array(Auth::user()->role, ['admin', 'coordinator']))
+        <div class="card shadow-sm my-3">
+            <div class="card-header">Post Update</div>
+            <div class="card-body">
+                @include('components.message')
+                <form method='post' action='{{ route('update.store') }}' enctype="multipart/form-data">
+                    <textarea id='editor' name="content" rows="2" class="form-control"></textarea>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div>
+                            @csrf
+                            <input type="hidden" name="child" value='{{ $child->id }}' />
+                            <input class='form-control' name='attachment' type='file' accept="image/*" />
+                        </div>
+                        <button class="btn btn-primary">Submit</button>
                     </div>
-                    <button class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
+    @endif
 @endsection
 @section('styles')
     <style>

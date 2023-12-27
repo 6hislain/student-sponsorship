@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Child;
+use App\Models\ChildSupport;
 use App\Models\Payment;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
@@ -35,6 +36,21 @@ class DefaultController extends Controller
     public function license()
     {
         return view('license');
+    }
+
+    public function support(Request $request, Child $child, Sponsor $sponsor)
+    {
+        $data = [
+            'user_id' => Auth::id(),
+            'child_id' => $child->id,
+            'sponsor_id' => $sponsor->id,
+        ];
+        $support = ChildSupport::where($data)->first();
+
+        if ($support) $support->delete();
+        else ChildSupport::create($data);
+
+        return redirect()->back();
     }
 
     public function dashboard()

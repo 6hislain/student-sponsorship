@@ -9,11 +9,13 @@
     </nav>
     <div class='d-flex justify-content-between'>
         <h2>All children</h2>
-        <span>
-            <a class='btn btn-outline-primary rounded-pill' href='{{ route('child.create') }}'>
-                <i class='bi bi-plus'></i> Add child
-            </a>
-        </span>
+        @if (in_array(Auth::user()->role, ['admin', 'coordinator']))
+            <span>
+                <a class='btn btn-outline-primary rounded-pill' href='{{ route('child.create') }}'>
+                    <i class='bi bi-plus'></i> Add child
+                </a>
+            </span>
+        @endif
     </div>
     <table class="table table-bordered table-hover">
         <thead class="table-light">
@@ -43,20 +45,27 @@
                     <td>{{ $child->address }}</td>
                     <td>{{ $child->contact_person }} {{ $child->contact_details }}</td>
                     <td>
-                        <div class='btn-group'>
-                            <a class='btn btn-sm btn-success' href='{{ route('child.show', $child->id) }}'>
-                                <i class='bi bi-eye'></i>
+                        @if (Auth::user()->role == 'sponsor')
+                            <a href='' class='btn btn-sm btn-info' data-toggle="tooltip" title="Sponsor child">
+                                <i class='bi bi-check'></i>
                             </a>
-                            <a class='btn btn-sm btn-info' href='{{ route('child.edit', $child->id) }}'>
-                                <i class='bi bi-pencil'></i>
-                            </a>
-                        </div>
-                        <form action='{{ route('child.destroy', $child->id) }}' method='post' class='d-inline'>
-                            @csrf @method('delete')
-                            <button class='btn btn-sm btn-warning'>
-                                <i class='bi bi-trash'></i>
-                            </button>
-                        </form>
+                        @endif
+                        @if (in_array(Auth::user()->role, ['admin', 'coordinator']))
+                            <div class='btn-group'>
+                                <a class='btn btn-sm btn-success' href='{{ route('child.show', $child->id) }}'>
+                                    <i class='bi bi-eye'></i>
+                                </a>
+                                <a class='btn btn-sm btn-info' href='{{ route('child.edit', $child->id) }}'>
+                                    <i class='bi bi-pencil'></i>
+                                </a>
+                            </div>
+                            <form action='{{ route('child.destroy', $child->id) }}' method='post' class='d-inline'>
+                                @csrf @method('delete')
+                                <button class='btn btn-sm btn-warning'>
+                                    <i class='bi bi-trash'></i>
+                                </button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

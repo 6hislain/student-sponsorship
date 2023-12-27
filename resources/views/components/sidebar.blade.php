@@ -23,6 +23,10 @@
                         class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'sponsor')) active @endif">
                         <i class='bi bi-person-check me-2'></i> Sponsor
                     </a>
+                    <a href="{{ route('update.index') }}"
+                        class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'update')) active @endif">
+                        <i class='bi bi-arrow-down-up me-2'></i> Update
+                    </a>
                 @endif
                 @if (in_array(Auth::user()->role, ['sponsor', 'coordinator', 'admin']))
                     <a href="{{ route('child.index') }}"
@@ -32,10 +36,6 @@
                     <a href="{{ route('payment.index') }}"
                         class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'payment')) active @endif">
                         <i class='bi bi-box me-2'></i> Payment
-                    </a>
-                    <a href="{{ route('update.index') }}"
-                        class="list-group-item list-group-item-action @if (str_contains(Route::currentRouteName(), 'update')) active @endif">
-                        <i class='bi bi-arrow-down-up me-2'></i> Update
                     </a>
                 @endif
                 @if (in_array(Auth::user()->role, ['user', 'coordinator', 'admin']))
