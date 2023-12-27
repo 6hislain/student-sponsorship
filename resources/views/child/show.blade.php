@@ -40,10 +40,17 @@
                         <td colspan="3">{!! $child->description !!}</td>
                         <td>
                             @if (Auth::user()->role == 'sponsor')
-                                <a href='{{ route('child.support', $child->id) }}' class='btn btn-sm btn-info'
-                                    data-toggle="tooltip" title="Sponsor child">
-                                    <i class='bi bi-check'></i>
-                                </a>
+                                @if ($supported)
+                                    <a href='{{ route('child.support', $child->id) }}' class='btn btn-sm btn-warning'
+                                        data-toggle="tooltip" title="Stop sponsorship">
+                                        <i class='bi bi-x-lg'></i>
+                                    </a>
+                                @else
+                                    <a href='{{ route('child.support', $child->id) }}' class='btn btn-sm btn-info'
+                                        data-toggle="tooltip" title="Sponsor child">
+                                        <i class='bi bi-check'></i>
+                                    </a>
+                                @endif
                             @endif
                         </td>
                     </tr>
