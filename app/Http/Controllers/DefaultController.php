@@ -43,7 +43,8 @@ class DefaultController extends Controller
     public function sponsored()
     {
         $sponsor = Sponsor::where('user_id', Auth::id())->first();
-        return redirect()->route('sponsor.show', $sponsor->id);
+        $children = ChildSupport::where('user_id', Auth::id())->paginate(10);
+        return view('sponsor.children', compact(['sponsor', 'children']));
     }
 
     public function support(Request $request, Child $child)

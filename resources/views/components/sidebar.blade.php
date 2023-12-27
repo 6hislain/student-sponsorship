@@ -16,7 +16,7 @@
                 @endif
                 @if (Auth::user()->role == 'sponsor')
                     <a href="{{ route('sponsored') }}"
-                        class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'sponsor') active @endif">
+                        class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'sponsored') active @endif">
                         <i class='bi bi-speedometer2 me-2'></i> Sponsored Children
                     </a>
                 @endif
