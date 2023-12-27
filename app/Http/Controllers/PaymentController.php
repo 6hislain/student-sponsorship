@@ -125,7 +125,6 @@ class PaymentController extends Controller
             'sponsor_id' => isset($sponsor) ? $sponsor->id : $request['sponsor'],
             'description' => $request['description'],
             'attachment' => $image ? $image_name : null,
-            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('payment.index');
