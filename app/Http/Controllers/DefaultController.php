@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApprovalMail;
 use App\Models\Application;
 use App\Models\Child;
 use App\Models\ChildSupport;
@@ -10,6 +11,7 @@ use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class DefaultController extends Controller
 {
@@ -51,6 +53,49 @@ class DefaultController extends Controller
         else ChildSupport::create($data);
 
         return redirect()->back();
+    }
+
+    public function approve(Request $request)
+    {
+        $request->validate([
+            'identification' => ['required'],
+            'application' => ['required'],
+            'image' => ['required'],
+            'dob' => ['required'],
+        ]);
+
+        $application = Application::find($request['application']);
+        $image = $request->file('image');
+        $identification = $request->file('identification');
+        if ($image) {
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public', $image_name);
+        }
+        if ($identification) {
+            $identification_name = time() . '.' . $identification->getClientOriginalExtension();
+            $identification->storeAs('public', $identification_name);
+        }
+
+        Sponsor::create([
+            'first_name' => $application->first_name,
+            'last_name' => $application->last_name,
+            'address' => $application->address,
+            'contact' => $application->email,
+            'dob' => $request['dob'],
+            'identification' => $identification ? $identification_name : null,
+            'image' => $image ? $image_name : null,
+            'description' => $application->message,
+            'user_id' => $application->user_id,
+        ]);
+
+        $application->delete();
+
+        try {
+            Mail::to($application->email)->send(new ApprovalMail());
+        } catch (\Exception $e) {
+        }
+
+        return redirect()->route('sponsor.index');
     }
 
     public function dashboard()
