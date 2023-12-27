@@ -27,7 +27,8 @@ Route::get('/license', [DefaultController::class, 'license'])->name('license');
 Route::get('/dashboard', [DefaultController::class, 'dashboard'])->name('dashboard');
 Route::get('/dashboard/report', [DefaultController::class, 'report'])->name('report');
 Route::post('/dashboard/approve', [DefaultController::class, 'approve'])->name('approve');
-Route::get('/dashboard/support/{child}/{sponsor}', [DefaultController::class, 'support'])->name('child.support');
+Route::get('/dashboard/sponsored', [DefaultController::class, 'sponsored'])->name('sponsored');
+Route::get('/dashboard/support/{child}', [DefaultController::class, 'support'])->name('child.support');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);

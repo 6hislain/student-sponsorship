@@ -46,9 +46,15 @@
                     <td>{{ $child->contact_person }} {{ $child->contact_details }}</td>
                     <td>
                         @if (Auth::user()->role == 'sponsor')
-                            <a href='' class='btn btn-sm btn-info' data-toggle="tooltip" title="Sponsor child">
-                                <i class='bi bi-check'></i>
-                            </a>
+                            <div class='btn-group'>
+                                <a class='btn btn-sm btn-success' href='{{ route('child.show', $child->id) }}'>
+                                    <i class='bi bi-eye'></i>
+                                </a>
+                                <a href='{{ route('child.support', $child->id) }}' class='btn btn-sm btn-info'
+                                    data-toggle="tooltip" title="Sponsor child">
+                                    <i class='bi bi-check'></i>
+                                </a>
+                            </div>
                         @endif
                         @if (in_array(Auth::user()->role, ['admin', 'coordinator']))
                             <div class='btn-group'>

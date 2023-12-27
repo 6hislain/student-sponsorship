@@ -31,8 +31,10 @@
                 <tr>
                     <th scope="row">{{ $key + 1 }}</th>
                     <td>
-                        <img src='{{ $sponsor->image }}' height="40" width='40' alt=''
-                            class='rounded-pill me-1' />
+                        @if ($sponsor->image)
+                            <img alt='{{ $sponsor->first_name }}' src='{{ asset('storage/' . $sponsor->image) }}'
+                                width='40' height='40' style='object-fit:cover' class='rounded-pill me-1' />
+                        @endif
                         {{ $sponsor->first_name }} {{ $sponsor->last_name }}
                     </td>
                     <td>{{ $sponsor->dob }}</td>

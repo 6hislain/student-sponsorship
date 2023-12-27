@@ -14,6 +14,12 @@
                         <i class='bi bi-speedometer2 me-2'></i> Dashboard
                     </a>
                 @endif
+                @if (Auth::user()->role == 'sponsor')
+                    <a href="{{ route('sponsored') }}"
+                        class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'sponsor') active @endif">
+                        <i class='bi bi-speedometer2 me-2'></i> Sponsored Children
+                    </a>
+                @endif
                 @if (in_array(Auth::user()->role, ['admin', 'coordinator']))
                     <a href="{{ route('report') }}"
                         class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'report') active @endif">

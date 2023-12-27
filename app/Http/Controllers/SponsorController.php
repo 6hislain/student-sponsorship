@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Child;
+use App\Models\ChildSupport;
 use App\Models\Payment;
 use App\Models\Sponsor;
 use App\Models\User;
@@ -55,7 +56,7 @@ class SponsorController extends Controller
     public function show(Request $request, Sponsor $sponsor)
     {
         $payments = Payment::paginate(10);
-        $children = Child::take(10)->get();
+        $children = ChildSupport::where('user_id', Auth::id())->paginate(10);
         return view('sponsor.show', compact(['sponsor', 'payments', 'children']));
     }
 

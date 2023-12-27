@@ -40,8 +40,15 @@ class DefaultController extends Controller
         return view('license');
     }
 
-    public function support(Request $request, Child $child, Sponsor $sponsor)
+    public function sponsored()
     {
+        $sponsor = Sponsor::where('user_id', Auth::id())->first();
+        return redirect()->route('sponsor.show', $sponsor->id);
+    }
+
+    public function support(Request $request, Child $child)
+    {
+        $sponsor = Sponsor::where('user_id', Auth::id())->first();
         $data = [
             'user_id' => Auth::id(),
             'child_id' => $child->id,
