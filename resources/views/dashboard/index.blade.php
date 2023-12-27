@@ -18,33 +18,29 @@
     <div class='row'>
         <div class='col-md-3'>
             <div class='card card-body border-0 bg-success text-white shadow-sm'>
-                <h5 class='fw-normal'>CHILDREN</h5>
+                <h6 class='fw-normal'>CHILDREN</h6>
                 <h1>{{ $children }} <i class="bi bi-arrow-down-up float-end"></i></h1>
-                <p class="text-white mb-0">12% from last month</p>
             </div>
         </div>
         <div class='col-md-3'>
             <div class='card card-body border-0 bg-info shadow-sm'>
-                <h5 class='fw-normal'>SPONSORS</h5>
+                <h6 class='fw-normal'>SPONSORS</h6>
                 <h1>{{ $sponsors }} <i class="bi bi-box float-end"></i></h1>
-                <p class="text-muted mb-0">12% from last month</p>
             </div>
         </div>
         <div class='col-md-3'>
             <div class='card card-body border-0 bg-secondary text-white shadow-sm'>
-                <h5 class='fw-normal'>PAYMENTS</h5>
+                <h6 class='fw-normal'>PAYMENTS</h6>
                 <h1>{{ $payments }} <i class="bi bi-collection float-end"></i></h1>
-                <p class="text-white mb-0">12% from last month</p>
             </div>
         </div>
         <div class='col-md-3'>
             <div class='card card-body border-0 bg-warning shadow-sm'>
-                <h5 class='fw-normal'>SPONSOR APPLICATIONS</h5>
+                <h6 class='fw-normal'>SPONSOR APPLICATIONS</h6>
                 <h1>{{ $applications }} <i class="bi bi-person-check float-end"></i></h1>
-                <p class="text-muted mb-0">12% from last month</p>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 mt-2">
             <canvas id="myChart" width="400" height="150"></canvas>
         </div>
     </div>
