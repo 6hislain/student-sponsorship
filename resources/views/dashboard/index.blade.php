@@ -52,10 +52,18 @@
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["John", "Sarah", "Mark", "Laura", "Dylan", "Jessica"],
+                labels: [
+                    @foreach ($sponsor_list as $sponsor)
+                        '{{ $sponsor->first_name }} {{ $sponsor->last_name }}',
+                    @endforeach
+                ],
                 datasets: [{
-                    label: 'Active Donors',
-                    data: [2, 9, 3, 5, 2, 3],
+                    label: 'Sponsor & Sponsored Children',
+                    data: [
+                        @foreach ($sponsor_list as $sponsor)
+                            {{ count($sponsor->childSupport) }},
+                        @endforeach
+                    ],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',

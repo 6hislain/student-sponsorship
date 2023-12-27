@@ -113,9 +113,10 @@ class DefaultController extends Controller
         $sponsors = Sponsor::count();
         $applications = Application::count();
         $payments = Payment::count();
+        $sponsor_list = Sponsor::take(10)->get();
 
         if (Auth::user()->role == 'user') return redirect()->route('application.create');
-        else return view('dashboard.index', compact(['children', 'sponsors', 'applications', 'payments']));
+        else return view('dashboard.index', compact(['children', 'sponsors', 'applications', 'payments', 'sponsor_list']));
     }
 
     public function report()

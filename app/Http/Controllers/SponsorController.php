@@ -35,10 +35,21 @@ class SponsorController extends Controller
             'first_name' => ['required', 'min:3', 'max:50'],
             'last_name' => ['required', 'min:3', 'max:50'],
             'contact' => ['required', 'min:5', 'max:50'],
-            'identification' => ['required'],
             'user' => ['required'],
             'dob' => ['required'],
+            'image' => ['image'],
         ]);
+
+        $image = $request->file('image');
+        $identification = $request->file('identification');
+        if ($image) {
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public', $image_name);
+        }
+        if ($identification) {
+            $identification_name = time() . '.' . $identification->getClientOriginalExtension();
+            $identification->storeAs('public', $identification_name);
+        }
 
         Sponsor::create([
             'first_name' => $request['first_name'],
@@ -48,6 +59,8 @@ class SponsorController extends Controller
             'dob' => $request['dob'],
             'description' => $request['description'],
             'user_id' => $request['user'],
+            'image' => $image ? $image_name : null,
+            'identification' => $identification ? $identification_name : null,
         ]);
 
         return redirect()->route('sponsor.index');
@@ -74,7 +87,19 @@ class SponsorController extends Controller
             'contact' => ['required', 'min:5', 'max:50'],
             'user' => ['required'],
             'dob' => ['required'],
+            'image' => ['image'],
         ]);
+
+        $image = $request->file('image');
+        $identification = $request->file('identification');
+        if ($image) {
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public', $image_name);
+        }
+        if ($identification) {
+            $identification_name = time() . '.' . $identification->getClientOriginalExtension();
+            $identification->storeAs('public', $identification_name);
+        }
 
         $sponsor->update([
             'first_name' => $request['first_name'],
@@ -84,9 +109,12 @@ class SponsorController extends Controller
             'dob' => $request['dob'],
             'description' => $request['description'],
             'user_id' => $request['user'],
+            'image' => $image ? $image_name : null,
+            'identification' => $identification ? $identification_name : null,
         ]);
 
-        return redirect()->route('sponsor.index');
+        if (Auth::user()->role == 'sponsor') return redirect()->route('user.show', Auth::id());
+        else return redirect()->route('sponsor.index');
     }
 
     public function destroy(Sponsor $sponsor)
