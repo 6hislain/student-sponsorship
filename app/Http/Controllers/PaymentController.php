@@ -17,7 +17,8 @@ class PaymentController extends Controller
 
     public function index()
     {
-        $payments = Payment::paginate(10);
+        if (Auth::user()->role == 'sponsor') $payments = Payment::where('user_id', Auth::id())->paginate(10);
+        else $payments = Payment::paginate(10);
         return view('payment.index', compact('payments'));
     }
 
