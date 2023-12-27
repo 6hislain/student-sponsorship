@@ -7,6 +7,7 @@ use App\Models\Child;
 use App\Models\Payment;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DefaultController extends Controller
@@ -43,7 +44,8 @@ class DefaultController extends Controller
         $applications = Application::count();
         $payments = Payment::count();
 
-        return view('dashboard.index', compact(['children', 'sponsors', 'applications', 'payments']));
+        if (Auth::user()->role == 'user') return redirect()->route('application.create');
+        else return view('dashboard.index', compact(['children', 'sponsors', 'applications', 'payments']));
     }
 
     public function report()

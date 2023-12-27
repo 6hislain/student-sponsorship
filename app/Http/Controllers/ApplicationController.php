@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApplicationMail;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
@@ -15,7 +17,8 @@ class ApplicationController extends Controller
 
     public function index()
     {
-        $applications = Application::paginate(10);
+        if (Auth::user()->role == 'user') $applications = Application::where('user_id', Auth::id())->paginate(10);
+        else $applications = Application::paginate(10);
         return view('application.index', compact('applications'));
     }
 
@@ -51,6 +54,11 @@ class ApplicationController extends Controller
             'message' => $request['message'],
             'user_id' => Auth::id(),
         ]);
+
+        try {
+            Mail::to($request['email'])->send(new ApplicationMail());
+        } catch (\Exception $e) {
+        }
 
         return redirect()->route('application.index');
     }

@@ -75,7 +75,10 @@ class AuthController extends Controller
             'password' => Hash::make($request['password'])
         ]);
 
-        Mail::to($request['email'])->send(new WelcomeMail());
+        try {
+            Mail::to($request['email'])->send(new WelcomeMail());
+        } catch (\Exception $e) {
+        }
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();

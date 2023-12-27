@@ -8,10 +8,12 @@
                 <a href="{{ route('home') }}" class="list-group-item list-group-item-action">
                     <i class='bi bi-house me-2'></i> Home
                 </a>
-                <a href="{{ route('dashboard') }}"
-                    class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'dashboard') active @endif">
-                    <i class='bi bi-speedometer2 me-2'></i> Dashboard
-                </a>
+                @if (Auth::user()->role != 'user')
+                    <a href="{{ route('dashboard') }}"
+                        class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'dashboard') active @endif">
+                        <i class='bi bi-speedometer2 me-2'></i> Dashboard
+                    </a>
+                @endif
                 @if (in_array(Auth::user()->role, ['admin', 'coordinator']))
                     <a href="{{ route('report') }}"
                         class="list-group-item list-group-item-action @if (Route::currentRouteName() == 'report') active @endif">
