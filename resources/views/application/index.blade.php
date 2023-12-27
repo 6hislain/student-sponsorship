@@ -36,9 +36,11 @@
                     <td>{{ $application->user->name }}</td>
                     <td>
                         <div class='btn-group'>
-                            <a class='btn btn-sm btn-success' href='{{ route('application.show', $application->id) }}'>
-                                <i class='bi bi-eye'></i>
-                            </a>
+                            @if (in_array(Auth::user()->role, ['admin', 'coordinator']))
+                                <a class='btn btn-sm btn-success' href='{{ route('application.show', $application->id) }}'>
+                                    <i class='bi bi-eye'></i>
+                                </a>
+                            @endif
                             <a class='btn btn-sm btn-info' href='{{ route('application.edit', $application->id) }}'>
                                 <i class='bi bi-pencil'></i>
                             </a>

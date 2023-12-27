@@ -88,6 +88,8 @@ class DefaultController extends Controller
             'user_id' => $application->user_id,
         ]);
 
+        $user = $application->user;
+        $user->update(['role' => 'sponsor']);
         $application->delete();
 
         try {
