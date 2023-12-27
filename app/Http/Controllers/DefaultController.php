@@ -120,7 +120,7 @@ class DefaultController extends Controller
 
     public function report()
     {
-        $total = Payment::sum('total_value');
+        $total = Payment::sum('local_value');
         $payments = Payment::select('sponsor_id', DB::raw('SUM(local_value) as totalAmount'))
             ->groupBy('sponsor_id')
             ->get();
