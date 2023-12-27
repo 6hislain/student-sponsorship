@@ -32,8 +32,10 @@
             <div class="card-header">Sponsor Information</div>
             <div class="card-body shadow-sm">
                 <div class="d-flex flex-row">
-                    <img src='{{ $sponsor->image }}' height="120" width='120' alt='{{ $sponsor->first_name }}'
-                        class='rounded-pill me-3 my-auto' />
+                    @if ($sponsor->image)
+                        <img alt='{{ $sponsor->first_name }}' src='{{ asset('storage/' . $sponsor->image) }}' width='120'
+                            height='120' style='object-fit:cover' class='rounded-pill me-3 my-auto' />
+                    @endif
                     <table class="table table-bordered table-hover mb-0">
                         <thead class="table-light">
                             <tr>
@@ -52,7 +54,12 @@
                             </tr>
                             <tr>
                                 <th>Description</th>
-                                <td colspan="3">{{ $sponsor->description }}</td>
+                                <td colspan="2">{!! $sponsor->description !!}</td>
+                                <td>
+                                    <a class='btn btn-sm btn-success' href='{{ route('sponsor.show', $sponsor->id) }}'>
+                                        <i class='bi bi-arrow-right'></i>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
