@@ -58,12 +58,14 @@
                         style='object-fit:cover' />
                 @endif
             </div>
-            <form action='{{ route('update.destroy', $update->id) }}' method='post' class='d-inline'>
-                @csrf @method('delete')
-                <button class='btn btn-sm btn-warning rounded-pill'>
-                    <i class='bi bi-trash'></i>
-                </button>
-            </form>
+            @if ($update->user_id == Auth::id())
+                <form action='{{ route('update.destroy', $update->id) }}' method='post' class='d-inline'>
+                    @csrf @method('delete')
+                    <button class='btn btn-sm btn-warning rounded-pill'>
+                        <i class='bi bi-trash'></i>
+                    </button>
+                </form>
+            @endif
         </div>
     @endforeach
     {{ $updates->links() }}
