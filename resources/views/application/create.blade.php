@@ -15,7 +15,7 @@
                 <div class='row'>
                     <div class='col-md-4'>
                         <select class='form-select mb-3' name='destination'>
-                            <option value=''>- who I choose to sponsorship -</option>
+                            <option value=''>- where I choose to sponsorship -</option>
                             <option value='gikongoro'>gikongoro</option>
                             <option value='byumba'>byumba</option>
                             <option value='kayonza'>kayonza</option>
