@@ -4,10 +4,7 @@
             <div class='col-md-7'>
                 <h4>About Us</h4>
                 <p>
-                    Demo Point of Sale (POS) Laravel project, a powerful and user-friendly solution for
-                    managing your retail business. This project showcases the capabilities of Laravel, a popular PHP
-                    framework, in creating a seamless and efficient POS system. With this demo, you can explore features
-                    such as inventory management, sales tracking, and easy product catalog management.
+                    
                 </p>
             </div>
             <div class='col-md-2'>
